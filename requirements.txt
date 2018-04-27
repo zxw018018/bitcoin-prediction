@@ -148,7 +148,6 @@ pycurl
 pyflakes
 Pygments
 pylint
-pyodbc
 pyOpenSSL
 pyorbital
 pyparsing
