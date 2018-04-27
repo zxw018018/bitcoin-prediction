@@ -140,7 +140,6 @@ psutil
 ptyprocess
 py
 pyasn1
-PyAudio
 pycodestyle
 pycosat
 pycparser
