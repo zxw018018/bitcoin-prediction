@@ -210,7 +210,6 @@ wcwidth
 webencodings
 Werkzeug
 widgetsnbextension
-wikiextractor
 wrapt
 xlrd
 XlsxWriter
