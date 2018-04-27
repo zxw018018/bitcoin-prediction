@@ -104,7 +104,6 @@ more-itertools
 mpmath
 msgpack-python
 multipledispatch
-mysql-connector-python-rf
 nbconvert
 nbformat
 ndg-httpsclient
