@@ -213,6 +213,5 @@ widgetsnbextension
 wrapt
 xlrd
 XlsxWriter
-xlwings
 xlwt
 zict
