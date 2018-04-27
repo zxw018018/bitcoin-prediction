@@ -23,7 +23,6 @@ bokeh==0.12.7
 boto==2.48.0
 Bottleneck==1.2.1
 bs4==0.0.1
-cdecimal==2.3
 certifi==2017.7.27.1
 cffi==1.10.0
 chardet==3.0.4
