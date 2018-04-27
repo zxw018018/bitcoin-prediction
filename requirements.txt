@@ -1,4 +1,3 @@
---upgrade
 absl-py
 alabaster
 alpha-vantage
@@ -215,4 +214,4 @@ wrapt
 xlrd
 XlsxWriter
 xlwt
-zict
+
