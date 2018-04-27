@@ -58,7 +58,7 @@ def gen_wind_speed(interval):
         #y=df['Speed'],
         y=last_list,
         line=Line(
-            color='#42C4F7'
+            color='#fab915'
         ),
         hoverinfo='skip',
         mode='lines'
@@ -84,7 +84,7 @@ def gen_wind_speed(interval):
         margin=Margin(
             t=45,
             l=50,
-            r=50
+            r=50,
         )
     )
 
