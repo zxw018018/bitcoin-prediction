@@ -107,7 +107,6 @@ mpmath
 msgpack-python
 multipledispatch
 mysql-connector-python-rf
-navigator-updater
 nbconvert
 nbformat
 ndg-httpsclient
