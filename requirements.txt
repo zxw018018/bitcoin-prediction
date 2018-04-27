@@ -31,7 +31,6 @@ cloudpickle
 clyent
 colorama
 conda
-conda-build
 conda-verify
 configparser
 contextlib2
