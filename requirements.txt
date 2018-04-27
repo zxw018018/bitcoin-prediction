@@ -3,7 +3,6 @@ alabaster
 alpha-vantage
 anaconda-client
 appnope
-appscript
 asn1crypto
 astor
 astroid
@@ -214,4 +213,4 @@ wrapt
 xlrd
 XlsxWriter
 xlwt
-
+zict
