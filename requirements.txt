@@ -62,7 +62,6 @@ futures
 gast
 gevent
 glob2
-gmpy2
 greenlet
 grin
 grpcio
