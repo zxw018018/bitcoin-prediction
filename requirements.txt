@@ -23,7 +23,6 @@ bokeh
 boto
 Bottleneck
 bs4
-cdecimal
 certifi
 cffi
 chardet
