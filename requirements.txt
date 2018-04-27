@@ -2,8 +2,6 @@ absl-py
 alabaster
 alpha-vantage
 anaconda-client
-anaconda-navigator
-anaconda-project
 appnope
 appscript
 asn1crypto
