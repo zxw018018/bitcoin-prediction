@@ -209,7 +209,6 @@ wrapt
 xlrd
 XlsxWriter
 xlwt
-zict
-python-tk 
+zict 
 python3-tk 
 tk-dev
