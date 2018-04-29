@@ -210,4 +210,6 @@ xlrd
 XlsxWriter
 xlwt
 zict
-tkinter
+python-tk 
+python3-tk 
+tk-dev
