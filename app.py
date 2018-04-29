@@ -200,18 +200,29 @@ def gen_wind_speed(interval):
         name='predict price'
     )
 
+    lastest_predict = 0.0
+    lastest_actual = 0.0
+    if len(predict_list) > 0 and len(show_last_list) > 0:
+        lastest_predict = predict_list[-1]
+        lastest_actual = show_last_list[-1]
 
-    if predict_list[-1] > show_last_list[-1]:
-        predict_arrow = -40
-        last_arrow = 40
-    else:
-        predict_arrow = 40
-        last_arrow = -40
+
+    predict_arrow = 0
+    last_arrow = 0
+    if len(show_last_list) > 10 and len(predict_list) > 10:
+        if predict_list[-slide_window/2] > lastest_actual:
+            predict_arrow = -60
+            last_arrow = 60
+        else:
+            predict_arrow = 60
+            last_arrow = -60
 
     total_error = 0.0
+    average_error = 0.0
     for i in range(len(show_last_list)):
         total_error = total_error + abs(predict_list[i]-show_last_list[i])/show_last_list[i]
-    average_error = total_error/len(show_last_list)
+    if len(show_last_list) > 0:
+        average_error = total_error/len(show_last_list)
     print "total error: " + str(total_error)
     print "average: "+str(average_error)
 
@@ -220,10 +231,10 @@ def gen_wind_speed(interval):
         annotations=[
             dict(
                 x=200,
-                y=predict_list[-1],
+                y=lastest_predict,
                 xref='x',
                 yref='y',
-                text=("%.2f" % predict_list[-1]),
+                text=("%.2f" % lastest_predict),
                 showarrow=True,
                 arrowhead=7,
                 arrowcolor='#4286f4',
@@ -232,10 +243,10 @@ def gen_wind_speed(interval):
             ),
             dict(
                 x=200-slide_window/2,
-                y=show_last_list[-1],
+                y=lastest_actual,
                 xref='x',
                 yref='y',
-                text=("%.2f" % show_last_list[-1]),
+                text=("%.2f" % lastest_actual),
                 showarrow=True,
                 arrowhead=7,
                 arrowcolor='#fab915',
@@ -243,7 +254,7 @@ def gen_wind_speed(interval):
                 ay=last_arrow
             )
         ],
-        title='average error: {:.2%}'.format(average_error),
+        title='average error: {:.4%}'.format(average_error),
         xaxis=dict(
             range=[0, 200],
             showgrid=True,
@@ -263,6 +274,7 @@ def gen_wind_speed(interval):
             t=45,
             l=50,
             r=50,
+            b=45,
         )
     )
 
