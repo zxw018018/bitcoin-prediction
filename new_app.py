@@ -26,7 +26,7 @@ import datetime
 from urllib2 import Request, urlopen, URLError, HTTPError
 import time
 
-app = dash.Dash('bitcoin-prediction')
+app = dash.Dash('streaming-wind-app')
 server = app.server
 
 def build_model(inputs, output_size, neurons, activ_func="linear",
