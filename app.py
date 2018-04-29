@@ -1,3 +1,4 @@
+import matplotlib
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -19,6 +20,7 @@ from keras.layers import Dropout
 import pandas as pd
 import time
 import seaborn as sns
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import datetime
 from urllib2 import Request, urlopen, URLError, HTTPError
