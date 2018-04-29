@@ -210,5 +210,4 @@ xlrd
 XlsxWriter
 xlwt
 zict 
-python3-tk 
 tk-dev
