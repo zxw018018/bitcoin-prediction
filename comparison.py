@@ -122,13 +122,22 @@ app.layout = html.Div([
     ], className='banner'),
     html.Div([
         html.Div([
-            html.H3("Bitcoin Price (USD)")
+            html.H3("Real-time Bitcoin Price (USD)")
         ], className='Title'),
         html.Div([
             dcc.Graph(id='wind-speed'),
         ], className='twelve columns wind-speed'),
         dcc.Interval(id='wind-speed-update', interval=1000, n_intervals=0),
     ], className='row wind-speed-row'),
+    html.Div([
+        html.Div([
+            html.Div([
+                html.H3("One Day Prediction")
+            ], className='Title'),
+            dcc.Graph(id='wind-histogram'),
+        ], className='seven columns wind-histogram'),
+       
+    ], className='row wind-histo-polar')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'})
@@ -283,7 +292,134 @@ def gen_wind_speed(interval):
     return Figure(data=[trace_actual,trace_predict], layout=layout)
 
 
+def gen_wind_histogram(interval, wind_speed_figure, sliderValue, auto_state):
+    wind_val = []
 
+    # Check to see whether wind-speed has been plotted yet
+    if wind_speed_figure is not None:
+        wind_val = wind_speed_figure['data'][0]['y']
+    if 'Auto' in auto_state:
+        bin_val = np.histogram(wind_val, bins=range(int(round(min(wind_val))),
+                               int(round(max(wind_val)))))
+    else:
+        bin_val = np.histogram(wind_val, bins=sliderValue)
+
+    avg_val = float(sum(wind_val))/len(wind_val)
+    median_val = np.median(wind_val)
+
+    pdf_fitted = rayleigh.pdf(bin_val[1], loc=(avg_val)*0.55,
+                              scale=(bin_val[1][-1] - bin_val[1][0])/3)
+
+    y_val = pdf_fitted * max(bin_val[0]) * 20,
+    y_val_max = max(y_val[0])
+    bin_val_max = max(bin_val[0])
+
+    trace = Bar(
+        x=bin_val[1],
+        y=bin_val[0],
+        marker=Marker(
+            color='#7F7F7F'
+        ),
+        showlegend=False,
+        hoverinfo='x+y'
+    )
+    trace1 = Scatter(
+        x=[bin_val[int(len(bin_val)/2)]],
+        y=[0],
+        mode='lines',
+        line=Line(
+            dash='dash',
+            color='#2E5266'
+        ),
+        marker=Marker(
+            opacity=0,
+        ),
+        visible=True,
+        name='Average'
+    )
+    trace2 = Scatter(
+        x=[bin_val[int(len(bin_val)/2)]],
+        y=[0],
+        line=Line(
+            dash='dot',
+            color='#BD9391'
+        ),
+        mode='lines',
+        marker=Marker(
+            opacity=0,
+        ),
+        visible=True,
+        name='Median'
+    )
+    trace3 = Scatter(
+        mode='lines',
+        line=Line(
+            color='#42C4F7'
+        ),
+        y=y_val[0],
+        x=bin_val[1][:len(bin_val[1])],
+        name='Rayleigh Fit'
+    )
+    layout = Layout(
+        xaxis=dict(
+            title='Wind Speed (mph)',
+            showgrid=False,
+            showline=False,
+            fixedrange=True
+        ),
+        yaxis=dict(
+            showgrid=False,
+            showline=False,
+            zeroline=False,
+            title='Number of Samples',
+            fixedrange=True
+        ),
+        margin=Margin(
+            t=50,
+            b=20,
+            r=50
+        ),
+        autosize=True,
+        bargap=0.01,
+        bargroupgap=0,
+        hovermode='closest',
+        legend=Legend(
+            x=0.175,
+            y=-0.2,
+            orientation='h'
+        ),
+        shapes=[
+            dict(
+                xref='x',
+                yref='y',
+                y1=int(max(bin_val_max, y_val_max))+0.5,
+                y0=0,
+                x0=avg_val,
+                x1=avg_val,
+                type='line',
+                line=Line(
+                    dash='dash',
+                    color='#2E5266',
+                    width=5
+                )
+            ),
+            dict(
+                xref='x',
+                yref='y',
+                y1=int(max(bin_val_max, y_val_max))+0.5,
+                y0=0,
+                x0=median_val,
+                x1=median_val,
+                type='line',
+                line=Line(
+                    dash='dot',
+                    color='#BD9391',
+                    width=5
+                )
+            )
+        ]
+    )
+    return Figure(data=[trace, trace1, trace2, trace3], layout=layout)
 
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
