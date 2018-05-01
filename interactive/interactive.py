@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# import matplotlib
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -33,12 +33,6 @@ from sklearn.metrics import mean_squared_error
 
 app = dash.Dash()
 
-# app.layout = html.Div([
-#     dcc.Input(id='input-1-state', type='text', value='Montréal'),
-#     dcc.Input(id='input-2-state', type='text', value='Canada'),
-#     html.Button(id='submit-button', n_clicks=0, children='Submit'),
-#     html.Div(id='output-state')
-# ])
 
 
 app.layout = html.Div([
@@ -247,4 +241,4 @@ if 'DYNO' in os.environ:
     })
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(os.environ['PORT'])

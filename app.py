@@ -1,4 +1,6 @@
-# import matplotlib
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -301,4 +303,4 @@ if 'DYNO' in os.environ:
     })
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(os.environ['PORT'])
