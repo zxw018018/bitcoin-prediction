@@ -241,4 +241,5 @@ if 'DYNO' in os.environ:
     })
 
 if __name__ == '__main__':
-    app.run_server(os.environ['PORT'])
+    #app.run_server(os.environ['PORT'])
+    app.run_server(port=9000)
