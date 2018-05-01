@@ -1,4 +1,3 @@
-# import matplotlib
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -20,14 +19,15 @@ from keras.layers import Dropout
 import pandas as pd
 import time
 import seaborn as sns
-# matplotlib.use('Agg')
-# import matplotlib.pyplot as plt
 import datetime
 from urllib2 import Request, urlopen, URLError, HTTPError
 import time
+from app import app
 
-app = dash.Dash('bitcoin-prediction')
-server = app.server
+
+
+
+
 
 def build_model(inputs, output_size, neurons, activ_func="linear",
                 dropout=0.25, loss="mae", optimizer="adam"):
@@ -113,9 +113,7 @@ for i in range(0, window_len+predict_len):
     last_list.append(float(get_response().read().split("last")[1].split("high")[0].split(' ')[1].split(',')[0]))
 
 
-
-
-app.layout = html.Div([
+layout = html.Div([
     html.Div([
         html.H2("Bitcoin Prediction"),
         html.Img(src="https://bitcoin.org/img/icons/opengraph.png"),
@@ -129,7 +127,7 @@ app.layout = html.Div([
         ], className='twelve columns wind-speed'),
         dcc.Interval(id='wind-speed-update', interval=1000, n_intervals=0),
     ], className='row wind-speed-row'),
-    
+    dcc.Link('Go to App 2', href='/apps/app2')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'})
