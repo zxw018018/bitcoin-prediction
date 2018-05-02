@@ -42,7 +42,7 @@ app.layout = html.Div([
     ], className='banner'),
     html.Div([
         html.Div([
-            html.H3("One Day Bitcoin Price Pridiction(USD)")
+            html.H3("Next Day Bitcoin Price Pridiction(USD)")
         ], className='Title'),
         html.Div([
             dcc.Graph(id='wind-speed'),
